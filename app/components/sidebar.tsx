@@ -137,6 +137,7 @@ export function SideBar(props: { className?: string }) {
             text={shouldNarrow ? undefined : Locale.Home.NewChat}
             onClick={() => {
               chatStore.newSession();
+              //创建新的消息
             }}
             shadow
           />
