@@ -124,13 +124,13 @@ export function SideBar(props: { className?: string }) {
               //首页左下角设置
             </Link>
           </div>
-          //<div className={styles["sidebar-action"]}>
-            //<a href={REPO_URL} target="_blank">
-              //<IconButton icon={<GithubIcon />} shadow />
+          <!-- <div className={styles["sidebar-action"]}>
+            <a href={REPO_URL} target="_blank">
+              <IconButton icon={<GithubIcon />} shadow />
               //首页github设置
-            //</a>
-          //</div>
-        //</div>
+            </a>
+          </div> -->
+        </div>
         <div>
           <IconButton
             icon={<AddIcon />}
