@@ -130,7 +130,7 @@ export function SideBar(props: { className?: string }) {
               //首页github设置
             //</a>
           //</div>
-        </div>
+        //</div>
         <div>
           <IconButton
             icon={<AddIcon />}
