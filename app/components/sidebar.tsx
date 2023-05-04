@@ -121,13 +121,13 @@ export function SideBar(props: { className?: string }) {
           <div className={styles["sidebar-action"]}>
             <Link to={Path.Settings}>
               <IconButton icon={<SettingsIcon />} shadow />
-              //首页左下角设置
+              {/* 首页左下角设置 */}
             </Link>
           </div>
           <div className={styles["sidebar-action"]}>
                 <a href="http://www.dns.jyrz22.cn" target="_blank"><span>你好</span>
               <IconButton icon={<GithubIcon />} shadow />
-              //首页跳转官网设置
+              {/* 首页跳转官网设置 */}
             </a>
           </div> 
         </div>
@@ -137,7 +137,7 @@ export function SideBar(props: { className?: string }) {
             text={shouldNarrow ? undefined : Locale.Home.NewChat}
             onClick={() => {
               chatStore.newSession();
-              //创建新的消息
+               {/* 创建新的消息 */}
             }}
             shadow
           />
