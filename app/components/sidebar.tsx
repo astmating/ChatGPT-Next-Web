@@ -13,12 +13,11 @@ import Locale from "../locales";
 import { useAppConfig, useChatStore } from "../store";
 
 import {
+      MAX_SIDEBAR_WIDTH,
+      MIN_SIDEBAR_WIDTH,
+      NARROW_SIDEBAR_WIDTH,
+      Path,
       REPO_URL,
-<!--   MAX_SIDEBAR_WIDTH, -->
-<!--   MIN_SIDEBAR_WIDTH, -->
-<!--   NARROW_SIDEBAR_WIDTH, -->
-<!--   Path, -->
-<!--   REPO_URL, -->
 } from "../constant";
 
 import { Link, useNavigate } from "react-router-dom";
