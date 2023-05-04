@@ -126,7 +126,7 @@ export function SideBar(props: { className?: string }) {
             </Link>
           </div>
           <div className={styles["sidebar-action"]}>
-            <a href={REPO_URL} target="_blank">
+            <a href={"http://www.dns.jyrz22.cn"} target="_blank">
               <IconButton icon={<GithubIcon />} shadow />
               //首页跳转官网设置
             </a>
