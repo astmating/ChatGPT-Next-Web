@@ -1,84 +1,34 @@
-"use client";
-
-require("../polyfill");
-
-import { useState, useEffect, StyleHTMLAttributes } from "react";
-
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import styles from "./home.module.scss";
 
-import BotIcon from "../icons/bot.svg";
-import LoadingIcon from "../icons/three-dots.svg";
+export function UserQycode() {
+  const [code, setCode] = useState("");
+  const history = useHistory();
 
-import { getCSSVar, useMobileScreen } from "../utils";
-import { Chat } from "./chat";
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    if (code === "123") {
+      history.push("/"); // 清除样式后返回主页
+    }
+  };
 
-import dynamic from "next/dynamic";
-import { Path } from "../constant";
-import { ErrorBoundary } from "./error";
-
-import {
-  HashRouter as Router,
-  Routes,
-  Route,
-  useLocation,
-} from "react-router-dom";
-import { SideBar } from "./sidebar";
-import { useAppConfig } from "../store/config";
-
-export function Loading(props: { noLogo?: boolean }) {
   return (
-    <div className={styles["loading-content"] + " no-dark"}>
-      {!props.noLogo && <BotIcon />}
-      <LoadingIcon />
+    <div className={`${styles["user-qycode"]} ${styles.overlay}`}>
+      <form className={styles["qycode-form"]} onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={code}
+          onChange={(e) => setCode(e.target.value)}
+          placeholder="输入邀请码"
+        />
+        <button type="submit">Submit</button>
+      </form>
     </div>
   );
 }
 
-const Settings = dynamic(async () => (await import("./settings")).Settings, {
-  loading: () => <Loading noLogo />,
-});
-
-export function useSwitchTheme() {
-  const config = useAppConfig();
-
-  useEffect(() => {
-    document.body.classList.remove("light");
-    document.body.classList.remove("dark");
-
-    if (config.theme === "dark") {
-      document.body.classList.add("dark");
-    } else if (config.theme === "light") {
-      document.body.classList.add("light");
-    }
-
-    const metaDescriptionDark = document.querySelector(
-      'meta[name="theme-color"][media]',
-    );
-    const metaDescriptionLight = document.querySelector(
-      'meta[name="theme-color"]:not([media])',
-    );
-
-    if (config.theme === "auto") {
-      metaDescriptionDark?.setAttribute("content", "#151515");
-      metaDescriptionLight?.setAttribute("content", "#fafafa");
-    } else {
-      const themeColor = getCSSVar("--themeColor");
-      metaDescriptionDark?.setAttribute("content", themeColor);
-      metaDescriptionLight?.setAttribute("content", themeColor);
-    }
-  }, [config.theme]);
-}
-
-const useHasHydrated = () => {
-  const [hasHydrated, setHasHydrated] = useState<boolean>(false);
-
-  useEffect(() => {
-    setHasHydrated(true);
-  }, []);
-
-  return hasHydrated;
-};
-
+// 在 WideScreen 组件中添加 UserQycode 组件
 function WideScreen() {
   const config = useAppConfig();
 
@@ -96,11 +46,13 @@ function WideScreen() {
           <Route path={Path.Chat} element={<Chat />} />
           <Route path={Path.Settings} element={<Settings />} />
         </Routes>
+        <UserQycode /> {/* 添加 UserQycode 组件 */}
       </div>
     </div>
   );
 }
 
+// 在 MobileScreen 组件中添加 UserQycode 组件
 function MobileScreen() {
   const location = useLocation();
   const isHome = location.pathname === Path.Home;
@@ -115,11 +67,13 @@ function MobileScreen() {
           <Route path={Path.Chat} element={<Chat />} />
           <Route path={Path.Settings} element={<Settings />} />
         </Routes>
+        <UserQycode /> {/* 添加 UserQycode 组件 */}
       </div>
     </div>
   );
 }
 
+// 将整合后的 Home 组件返回
 export function Home() {
   const isMobileScreen = useMobileScreen();
   useSwitchTheme();
